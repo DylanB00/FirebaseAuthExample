@@ -38,7 +38,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidLoad() {
-        textFieldShouldReturn(emailField)
         super.viewDidLoad()
         emailField.delegate = self
         emailField.tag = 1

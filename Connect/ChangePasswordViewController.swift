@@ -13,30 +13,40 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var changePassLabel: UILabel!
     @IBOutlet weak var passField: UITextField!
+    @IBOutlet weak var confirmPassField: UITextField!
     @IBOutlet weak var viewPassButton: UIButton!
     @IBAction func viewPass(_ sender: Any) {
         if (passField.isSecureTextEntry == true) {
-            viewPassButton.setTitle("Hide Password" ,for: .normal)
-            viewPassButton.titleLabel?.text = "View Password"
+            viewPassButton.setTitle("Hide New Password" ,for: .normal)
+            viewPassButton.titleLabel?.text = "View New Password"
             passField.isSecureTextEntry = false
         } else {
-            viewPassButton.setTitle("View Password" ,for: .normal)
-            viewPassButton.titleLabel?.text = "Hide Password"
+            viewPassButton.setTitle("View New Password" ,for: .normal)
+            viewPassButton.titleLabel?.text = "Hide New Password"
             passField.isSecureTextEntry = true
         }
     }
     
     func changePass() {
-        Auth.auth().currentUser?.updatePassword(to: passField.text!, completion: { (error) in
-            if (self.passField.text?.characters.count)! < 6 {
-                self.changePassLabel.text = "Password must be at least six characters."
+        Auth.auth().currentUser?.reauthenticateAndRetrieveData(with: EmailAuthProvider.credential(withEmail: (Auth.auth().currentUser?.email)!, password: confirmPassField.text!), completion:  { (user, error) in
+            if let firebaseError = error {
+                print(firebaseError.localizedDescription)
+                self.changePassLabel.text = firebaseError.localizedDescription
+                return
             }
-            else {
-                self.changePassLabel.text = "Success!"
-                self.passField.text = ""
-            }
-            
+            Auth.auth().currentUser?.updatePassword(to: self.passField.text!, completion: { (error) in
+                if (self.passField.text?.characters.count)! < 6 {
+                    self.changePassLabel.text = "Password must be at least six characters."
+                }
+                else {
+                    self.changePassLabel.text = "Success!"
+                    self.passField.text = ""
+                    self.confirmPassField.text = ""
+                }
+                
+            })
         })
+        
         }
         
     
@@ -70,10 +80,9 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
                 if self.passField.isSecureTextEntry == false {
                     self.passField.isSecureTextEntry = true
 
-            viewPassButton.setTitle("View Password", for: .normal)
+            viewPassButton.setTitle("View New Password", for: .normal)
         }
         let alert = UIAlertController(title: "Confirm Password", message: "Do you wish to confirm the new account password?", preferredStyle: UIAlertControllerStyle.alert)
-        
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             self.changePass()
         }))
@@ -81,6 +90,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
             print("Cancelled")
             self.passField.text = ""
+            self.confirmPassField.text = ""
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -89,25 +99,17 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         self.present(viewController, animated: false, completion: nil)
     }
     override func viewDidLoad() {
-        textFieldShouldReturn(passField)
         super.viewDidLoad()
         passField.delegate = self
-        passField.tag = 1
+        confirmPassField.delegate = self
+        
         
         // Do any additional setup after loading the view, typically from a nib.
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return false to ignore.
     {
-        // Try to find next responder
-        if let nextField = passField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
-            nextField.becomeFirstResponder()
-        } else {
-            // Not found, so remove keyboard.
-            passField.resignFirstResponder()
-            
-        }
-        // Do not add a line break
-        return false
+        textField.resignFirstResponder()
+        return true
     }
 
     override func didReceiveMemoryWarning() {

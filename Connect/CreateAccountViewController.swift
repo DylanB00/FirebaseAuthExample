@@ -9,7 +9,6 @@
 import UIKit
 import FirebaseAuth
 class CreateAccountViewController: UIViewController, UITextFieldDelegate {
-    @IBOutlet weak var statusTitle: UILabel!
     @IBOutlet weak var accountCreateTitle: UILabel!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -24,25 +23,16 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             { (user, error) in
             if let firebaseError = error {
                 print(firebaseError.localizedDescription)
-                self.statusTitle.text = firebaseError.localizedDescription
+                self.accountCreateTitle.text = firebaseError.localizedDescription
                 return
             }
                 self.accountCreateTitle.text = "Success!"
-                Auth.auth().signIn(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: { (user, error) in
-                    if let firebaseError = error {
-                        print(firebaseError.localizedDescription)
-                        self.statusTitle.text = firebaseError.localizedDescription
-                        return
-                    }
                     let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "signedInView") as UIViewController
                     self.present(viewController, animated: false, completion: nil)
                 })
-        })
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        textFieldShouldReturn(emailField)
         super.viewDidLoad()
         emailField.delegate = self
         emailField.tag = 1
@@ -66,14 +56,14 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             { (user, error) in
                 if let firebaseError = error {
                     print(firebaseError.localizedDescription)
-                    self.statusTitle.text = firebaseError.localizedDescription
+                    self.accountCreateTitle.text = firebaseError.localizedDescription
                     return
                 }
                 self.accountCreateTitle.text = "Success!"
                 Auth.auth().signIn(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: { (user, error) in
                     if let firebaseError = error {
                         print(firebaseError.localizedDescription)
-                        self.statusTitle.text = firebaseError.localizedDescription
+                        self.accountCreateTitle.text = firebaseError.localizedDescription
                         return
                     }
                     let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "signedInView") as UIViewController
