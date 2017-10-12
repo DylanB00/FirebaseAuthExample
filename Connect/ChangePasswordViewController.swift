@@ -48,34 +48,6 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         })
         
         }
-        
-    
-    
-    @IBAction func deleteAcc(_ sender: Any) {
-        let alert = UIAlertController(title: "Confirm Delete", message: "Delete your account?", preferredStyle: UIAlertControllerStyle.alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            let alert2 = UIAlertController(title: "Confirm Delete", message: "Are you sure you would like to delete your account? All information will be lost.", preferredStyle: UIAlertControllerStyle.alert)
-            
-            alert2.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                Auth.auth().currentUser?.delete(completion: { (error) in
-                    let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginView") as UIViewController
-                    self.present(viewController, animated: false, completion: nil)
-                    
-                })
-            }))
-            
-            alert2.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                print("Cancelled")
-            }))
-            self.present(alert2, animated: true, completion: nil)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-            print("Cancelled")
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
     @IBAction func confirmPass(_ sender: Any) {
                 if self.passField.isSecureTextEntry == false {
                     self.passField.isSecureTextEntry = true

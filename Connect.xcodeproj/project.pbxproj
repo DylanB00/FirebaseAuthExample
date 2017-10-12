@@ -17,6 +17,7 @@
 		E795437E1F8EF9B300C163AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E795437C1F8EF9B300C163AB /* LaunchScreen.storyboard */; };
 		E79543891F8EF9B300C163AB /* ConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79543881F8EF9B300C163AB /* ConnectTests.swift */; };
 		E79543941F8EF9B300C163AB /* ConnectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79543931F8EF9B300C163AB /* ConnectUITests.swift */; };
+		E7F901441F8FF13D00F15C8C /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F901431F8FF13D00F15C8C /* ChangeEmailViewController.swift */; };
 		E7FCCEB51F8F0D3900852691 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7FCCEB41F8F0D3900852691 /* GoogleService-Info.plist */; };
 		E7FCCEB71F8F178400852691 /* SignedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCCEB61F8F178400852691 /* SignedInViewController.swift */; };
 		E7FCCEB91F8F179400852691 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FCCEB81F8F179400852691 /* CreateAccountViewController.swift */; };
@@ -63,6 +64,7 @@
 		E795438F1F8EF9B300C163AB /* ConnectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConnectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E79543931F8EF9B300C163AB /* ConnectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectUITests.swift; sourceTree = "<group>"; };
 		E79543951F8EF9B300C163AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7F901431F8FF13D00F15C8C /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
 		E7FCCEB41F8F0D3900852691 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7FCCEB61F8F178400852691 /* SignedInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedInViewController.swift; sourceTree = "<group>"; };
 		E7FCCEB81F8F179400852691 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				E7FCCEB41F8F0D3900852691 /* GoogleService-Info.plist */,
 				E79543771F8EF9B300C163AB /* Main.storyboard */,
+				E7F901431F8FF13D00F15C8C /* ChangeEmailViewController.swift */,
 				E79543731F8EF9B300C163AB /* AppDelegate.swift */,
 				E79543751F8EF9B300C163AB /* LoginViewController.swift */,
 				E7FCCEBC1F8F354200852691 /* ChangePasswordViewController.swift */,
@@ -479,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7FCCEB91F8F179400852691 /* CreateAccountViewController.swift in Sources */,
+				E7F901441F8FF13D00F15C8C /* ChangeEmailViewController.swift in Sources */,
 				E7FCCEBB1F8F17A400852691 /* ForgotPasswordViewController.swift in Sources */,
 				E79543761F8EF9B300C163AB /* LoginViewController.swift in Sources */,
 				E7FCCEBD1F8F354200852691 /* ChangePasswordViewController.swift in Sources */,
